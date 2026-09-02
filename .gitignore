@@ -1,0 +1,8 @@
+node_modules/
+.next/
+.harness/
+*.log
+tsconfig.tsbuildinfo
+
+# Reference markup, saved for measurement only (A-15). Kept on disk, never committed.
+reference/raw/
