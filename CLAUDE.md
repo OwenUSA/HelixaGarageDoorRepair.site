@@ -35,7 +35,7 @@ BP_SET             = 390, 768, 1440   exactly three
 ```
 
 **EVERY BUSINESS FACT ABOVE IS FICTIONAL AND DELIBERATE.** The address does not exist;
-the coordinates are real Yukon, OK coordinates and the map is embedded by coordinates
+the coordinates are real Warner Robins, GA coordinates and the map is embedded by coordinates
 only, per D-07. The phone is in the 555-01XX reserved range and cannot ring anyone.
 Treat all of it as ground truth for the build and list every one of them in
 `docs/PRE-LAUNCH.md` as must-replace-before-public. This does not license inventing any
