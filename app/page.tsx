@@ -5,6 +5,12 @@
 // HTTP check caught it. Verified over HTTP, not by reading this file.
 import type { Metadata } from 'next';
 import { copy } from '@/content/copy';
+import HomeHero from '@/components/sections/HomeHero';
+import HomeWhy from '@/components/sections/HomeWhy';
+import HomeServices from '@/components/sections/HomeServices';
+import HomeReviews from '@/components/sections/HomeReviews';
+import HomeMap from '@/components/sections/HomeMap';
+import HomeCta from '@/components/sections/HomeCta';
 
 const page = copy.routes['/'];
 
@@ -14,5 +20,14 @@ export const metadata: Metadata = {
 };
 
 export default function HomePage() {
-  return <main id="main" data-route="/" />;
+  return (
+    <main id="main" data-route="/">
+      <HomeHero />
+      <HomeWhy />
+      <HomeServices />
+      <HomeReviews />
+      <HomeMap />
+      <HomeCta />
+    </main>
+  );
 }

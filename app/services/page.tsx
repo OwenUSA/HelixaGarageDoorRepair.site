@@ -5,8 +5,14 @@
 // HTTP check caught it. Verified over HTTP, not by reading this file.
 import type { Metadata } from 'next';
 import { copy } from '@/content/copy';
+import PageBanner from '@/components/sections/PageBanner';
+import ServicesIntro from '@/components/sections/ServicesIntro';
+import ServicesGrid from '@/components/sections/ServicesGrid';
+import ServicesFaq from '@/components/sections/ServicesFaq';
+import ServicesCta from '@/components/sections/ServicesCta';
 
 const page = copy.routes['/services'];
+const banner = page.sections.find((s) => s.id === 'services-banner')!;
 
 export const metadata: Metadata = {
   title: page.meta.title,
@@ -14,5 +20,18 @@ export const metadata: Metadata = {
 };
 
 export default function ServicesPage() {
-  return <main id="main" data-route="/services" />;
+  return (
+    <main id="main" data-route="/services">
+      <PageBanner
+        id="services-banner"
+        heading={banner.heading!}
+        subheading={banner.subheading}
+        image="/placeholders/services-banner-image.svg"
+      />
+      <ServicesIntro />
+      <ServicesGrid />
+      <ServicesFaq />
+      <ServicesCta />
+    </main>
+  );
 }

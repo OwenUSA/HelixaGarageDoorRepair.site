@@ -5,8 +5,12 @@
 // HTTP check caught it. Verified over HTTP, not by reading this file.
 import type { Metadata } from 'next';
 import { copy } from '@/content/copy';
+import PageBanner from '@/components/sections/PageBanner';
+import ContactMain from '@/components/sections/ContactMain';
+import ContactMap from '@/components/sections/ContactMap';
 
 const page = copy.routes['/contact'];
+const banner = page.sections.find((s) => s.id === 'contact-banner')!;
 
 export const metadata: Metadata = {
   title: page.meta.title,
@@ -14,5 +18,16 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
-  return <main id="main" data-route="/contact" />;
+  return (
+    <main id="main" data-route="/contact">
+      <PageBanner
+        id="contact-banner"
+        heading={banner.heading!}
+        subheading={banner.subheading}
+        image="/placeholders/contact-banner-image.svg"
+      />
+      <ContactMain />
+      <ContactMap />
+    </main>
+  );
 }
