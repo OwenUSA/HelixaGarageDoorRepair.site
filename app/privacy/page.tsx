@@ -14,5 +14,5 @@ export const metadata: Metadata = {
 };
 
 export default function PrivacyPage() {
-  return <main data-route="/privacy" />;
+  return <main id="main" data-route="/privacy" />;
 }

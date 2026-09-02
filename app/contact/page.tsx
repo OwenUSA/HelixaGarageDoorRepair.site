@@ -14,5 +14,5 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
-  return <main data-route="/contact" />;
+  return <main id="main" data-route="/contact" />;
 }

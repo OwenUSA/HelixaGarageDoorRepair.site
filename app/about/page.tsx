@@ -14,5 +14,5 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
-  return <main data-route="/about" />;
+  return <main id="main" data-route="/about" />;
 }

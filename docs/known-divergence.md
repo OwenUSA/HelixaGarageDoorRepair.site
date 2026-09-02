@@ -14,7 +14,45 @@ Stripped from the structural comparator: resolved `color`, `background-color`,
 `border-color`, gradient stops, shadow colour. **Kept:** every geometric and typographic
 field, and the non-colour parts of borders and shadows — widths, offsets, blur, spread, radii.
 
-Winning seed and all five candidate seeds are recorded here when Prompt 5 runs.
+**Winning seed and all five candidate seeds — recorded at Prompt 5+9.**
+
+`masterSeed` in `harness.config.mjs` was swept 1..32 (`node scripts/palette.mjs`, the shared
+generator at `../_shared/harness/src/palette.mjs`) to land the auto-selected winner's primary
+hue inside this site's assigned window, **292-315 (magenta/purple)**. `masterSeed 32` is the
+first hit: 16 rolls, 11 rejected (all on `CTA label ... below AA on its own fill`), 5
+survivors.
+
+| seed | scheme | primary hue | accent hue | neutral tint C | CTA contrast | CTA chroma |
+|---|---|---|---|---|---|---|
+| 254693 | split-complementary | 159 | 309 | 0.05 | 4.58 | 0.2269 |
+| 862980 | analogous (+30) | 281 | 311 | 0.047 | 4.59 | 0.2273 |
+| 286776 | analogous (+30) | 55 | 25 | 0.06 | 4.58 | 0.2271 |
+| 522005 | analogous (+30) | 309 | 339 | 0.033 | 4.61 | 0.2270 |
+| **301009** | **analogous (+30)** | **305** | **335** | **0.034** | **4.63** | **0.2274** |
+
+**Winner: seed 301009**, primary hue 305 (inside the 292-315 window), accent hue 335,
+analogous scheme at +30deg. Auto-selected by the standing rule — highest CTA contrast against
+its own fill, ties to the lowest seed — never by steering the selection itself; only
+`masterSeed` was swept.
+
+All 18 `pairsInUse` pairs pass their gate under the winner (18/18 PASS, including the
+gradient-sampled footer band at its worst of 5 stops). Full per-pair ratio table is
+reproducible with `node scripts/palette.mjs --seed 301009`.
+
+**Chroma ordering, measured both ways (RESUME carry-forward item):**
+
+| token | OKLCH C | HSV S |
+|---|---|---|
+| primary `#2c1f3a` | 0.0516 | 0.4655 |
+| accent `#c831b2` | 0.2274 | 0.7550 |
+
+No inversion here — accent is more saturated than primary under both OKLCH chroma (what
+`rendertruth.mjs` ranks on) and HSV saturation. The gate's own hard constraint
+(`chroma0(accent) > chroma0(primary)`) enforces this on every candidate anyway; this table
+is the double-check the carry-forward note asked for.
+
+`app/globals.css`'s `@theme static` colour tokens were verified 15/15 against
+`emitTheme(winner)`, literal string for literal string, not eyeballed.
 
 ## F-02 — body font substitution, all text, permanent (D-11)
 

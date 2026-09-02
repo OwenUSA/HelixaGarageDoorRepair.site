@@ -14,5 +14,5 @@ export const metadata: Metadata = {
 };
 
 export default function ServicesPage() {
-  return <main data-route="/services" />;
+  return <main id="main" data-route="/services" />;
 }

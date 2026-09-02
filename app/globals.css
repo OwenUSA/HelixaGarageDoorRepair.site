@@ -1,9 +1,128 @@
 @import "tailwindcss";
 
-/* Tokens land here in Prompt 5 (merged 5+9). Deliberately empty for now:
-   a stub @theme block would be mistaken for an extracted token set by diff.mjs. */
+/* ==========================================================================================
+   TOKENS — Prompt 5+9 (A-7: palette folded into token-write time, no separate recolor pass).
+   `@theme` holds LITERALS and is `@theme static`. A `var()` alias here normalises to the
+   string "var(--x)" and matches nothing in diff.mjs's token-conformance check, so every
+   colour/size/weight/radius/shadow/spacing value below is a literal. Font-family tokens are
+   the one exception below the theme block: diff.mjs's token conformance never inspects
+   font-family (see tokenViolations in ../_shared/harness/src/diff.mjs), so those are free to
+   reference the CSS variables next/font injects.
+   ========================================================================================== */
+@theme static {
+  /* ---- palette — seed 301009, analogous (+30deg), primary hue 305, neutral tint 0.034 ----
+     Winning candidate of 5 (masterSeed 32, 16 rolls, 11 rejected). Every L and C below is
+     held EXACTLY from the reference ramp (harness.config.mjs referenceRamp); only H moved.
+     Full seed record and gate table: docs/known-divergence.md F-01. */
+  --color-primary: oklch(26.83% 0.0516 305.36);
+  --color-primary-deep: oklch(24.35% 0.0467 304.26);
+  --color-accent: oklch(59.16% 0.2274 334.83);
+  --color-accent-deep: oklch(52.75% 0.1890 335.09);
+  --color-surface: oklch(100.00% 0.0000 89.88);
+  --color-neutral-200: oklch(98.15% 0.0113 308.33);
+  --color-neutral-400: oklch(83.27% 0.0348 304.47);
+  --color-neutral-600: oklch(40.95% 0.0328 304.13);
+  --color-neutral-900: oklch(26.11% 0.0348 304.44);
+  --color-border: oklch(83.27% 0.0348 304.47);
+  --color-border-strong: oklch(40.95% 0.0328 304.13);
+  --color-focus: oklch(32.07% 0.1412 335.40);
+  /* semantic — EXEMPT from hue rotation, conventional hues held (A-7) */
+  --color-error: oklch(50.13% 0.1783 28.70);
+  --color-success: oklch(51.18% 0.1274 149.71);
+  --color-warning: oklch(54.25% 0.1242 62.55);
 
-/* A-14 — one rule, site-wide, instead of per-component tap-target fixes.
-   min-height is inert on a purely inline box, so tel links inside prose keep their
-   natural metrics and the measured type scale is untouched. */
-a[href^="tel:"] { min-height: 44px; }
+  /* ---- type scale — measured from the local reference (scripts/extract-tokens.mjs) ---- */
+  --text-xs: 13px;
+  --text-sm: 14px;
+  --text-base: 16px;
+  --text-lg: 20px;
+  --text-xl: 24px;
+  --text-2xl: 28px;
+  --text-3xl: 32px;
+  --text-4xl: 40px;
+  --text-5xl: 56px;
+
+  --font-weight-normal: 400;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+
+  /* ---- radius — nearest matches to the measured set (23x 4.8px, 15x 800px pill, 12x 5px,
+     6x 16px, 4x 34px large-card, 3x 2px hairline) ---- */
+  --radius-xs: 2px;
+  --radius-sm: 5px;
+  --radius-md: 16px;
+  --radius-lg: 34px;
+  --radius-full: 800px;
+
+  /* ---- shadow — the three real values measured, colour kept (shadow colour is NOT one of
+     A-8's excluded fields; only resolved text/background/border colour and gradient stops
+     are stripped from the structural comparator) ---- */
+  --shadow-sm: 0px 2px 4px 0px rgba(0, 0, 0, 0.075);
+  --shadow-md: 0px 8px 16px 0px rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0px 0px 30px 0px rgba(35, 35, 35, 0.1);
+
+  /* ---- spacing — 9 named steps, nearest-match to the measured padding set (166x 4px,
+     145x 8px, 77x 48px, 44x 16px, 19x 13px~12px, 15x 20px, 16x 40px, 8x 24px, 6x 120px).
+     A-11: no new step is ever minted for a per-section padding value that misses this set --
+     the nearest one is used and the delta is recorded in the divergence report instead. ---- */
+  --spacing-3xs: 4px;
+  --spacing-2xs: 8px;
+  --spacing-xs: 12px;
+  --spacing-sm: 16px;
+  --spacing-md: 24px;
+  --spacing-lg: 32px;
+  --spacing-xl: 48px;
+  --spacing-2xl: 64px;
+  --spacing-3xl: 96px;
+
+  --container-max: 1320px;
+}
+
+/* Font-family tokens reference next/font's injected CSS variables (app/layout.tsx). Never
+   checked by token conformance (font-family is not one of diff.mjs's five kinds), so a
+   var() alias here is fine -- unlike every literal above. */
+:root {
+  --font-sans: var(--font-source-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-raleway), ui-sans-serif, system-ui, sans-serif;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-neutral-200);
+  color: var(--color-neutral-600);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  color: var(--color-neutral-900);
+}
+
+/* ---- focus ring — TWO-LAYER construction (harness.config.mjs pairsInUse comment) ----
+   A 2px surface-coloured halo inside a 3px --color-focus ring is the only shape that holds
+   3:1 against both a white page and a saturated accent-filled button with one token pair. */
+:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 2px var(--color-surface);
+  border-radius: var(--radius-xs);
+}
+
+/* A-14/A-15 — one rule, site-wide, instead of per-component tap-target fixes. min-height is
+   inert on a purely inline box, so tel links inside prose keep their natural metrics and the
+   measured type scale is untouched. flex-shrink: 0 matters the moment a tel: link sits
+   inside a flex parent (nav, call bar) -- a sibling's declared 48px shrank to 41px without it. */
+a[href^="tel:"] {
+  min-height: 44px;
+  flex-shrink: 0;
+}
+
+/* D-19 -- the reference theme ships no reduced-motion block of its own (F-10); honouring it
+   is entirely on us. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

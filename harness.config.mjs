@@ -96,7 +96,10 @@ export default {
   // element. Report how many seeds you tried. Note the auto-selector is structurally biased
   // toward magenta accents -- at fixed OKLCH L/C the lowest luminance sits near hue 300-360
   // -- so seeds landing there are common and must be re-rolled unless that IS your window.
-  masterSeed: 366,
+  // Swept 1..32: masterSeed 32 is the first to land its auto-selected winner's primary hue
+  // inside the 292-315 window (winner primaryHue 305). See docs/known-divergence.md F-01
+  // for the full candidate/rejection record.
+  masterSeed: 32,
 
   // ---- referenceRamp: EXTRACTED at Prompt 5 from the LOCAL reference server ------------
   // Mined by `scripts/extract-tokens.mjs`, which walks every visible element on all four
