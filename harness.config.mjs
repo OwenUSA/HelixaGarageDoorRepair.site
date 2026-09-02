@@ -28,21 +28,42 @@ export default {
 
   breakpoints: { diff: [390, 768, 1440], extra: [430], canonical: 1440 },
 
-  // Framework is UNPROFILED here -- Prompt 1 fills these in from the SAVED copy in
-  // reference/raw/, never the live site. Four distinct page builders have turned up across
-  // the fleet so far (Divi, Avada/Fusion, Elementor, and two bespoke themes), which is
-  // exactly why segmentation is per-site config and not baked into the package.
-  sectionCandidates: ['.elementor-top-section', '.e-con.e-parent', '.et_pb_section', '.fusion-fullwidth', 'main > section', 'section'],
+  // ---- segmentation, PROFILED in Prompt 1 from the saved copy --------------------------
+  // Reference stack: WordPress, bespoke "Seoteric-Framework" parent theme + "CrosbyRoofing"
+  // child theme, on Bootstrap 5.1. NOT a page builder -- no Divi/Elementor/Fusion/WPBakery
+  // markers anywhere in the saved HTML.
+  //
+  // `section` is a TRAP on this reference and is deliberately NOT first:
+  //   - /about yields exactly 1 <section> (the whole page above it is <div> bands),
+  //   - /contact yields 1, and it is a NESTED Gravity Forms widget, not a band at all,
+  //   - the hero (div#heroSlides) and every page banner (div#page-banner) are <div>.
+  // Segmenting on it drops 2290px of /about and mistakes a form widget for a top-level band.
+  // The real bands are the body's own element children, so that is what we segment on.
+  //
+  // `body > div` also excludes <aside#moove_gdpr_cookie_info_bar>, the GDPR plugin's
+  // position:fixed cookie bar. That is the overlay trap: it is painted at a different
+  // document offset per width, so including it re-sorts the band list and shifts every
+  // ordinal id after it. It appears on /about only, we ship no cookie banner (D-15), and it
+  // is DELETED in the contract.
+  //
+  // 'main > section' stays FIRST because it is how OUR side segments: every one of our
+  // bands is a <section data-section=...> inside <main>. The reference has no <main>.
+  sectionCandidates: ['main > section', 'body > div, body > section', 'section'],
+
   // EXACT selectors only -- config.mjs REFUSES a [class*=] matcher at startup, because one
   // matched <body class="pb-callbar"> on a sibling and containment-dedup then deleted
   // HEADER and FOOTER from every capture.
+  // Bare header/footer are safe HERE and were checked, not assumed: the reference has
+  // exactly one <header> and one <footer>, both direct children of <body>, with no nested
+  // <header> anywhere (a sibling's Themer wrapped <header> around an inner <header> and the
+  // outer one swallowed its own shell bands). Our shell will match that shape.
   chromeSelectors: ['header', 'footer'],
   headerSelector: 'header',
-  navToggleSelector: 'button[aria-controls], .menu-toggle, .hamburger',
-  drawerSelector: '[data-drawer], .mobile-menu, .nav-drawer',
+  navToggleSelector: 'button[aria-controls], .navbar-toggler, .menu-toggle, .hamburger',
+  drawerSelector: '#navbarText, [data-drawer], .mobile-menu, .nav-drawer',
   ctaSelector: 'a[href^="tel:"], button, [class*=btn], [class*=button]',
-  logoSelector: 'header img, .logo img, #logo',
-  iconFontFamilies: /fontawesome|icomoon|material|elementskit|awb-icons|eicons/i,
+  logoSelector: 'header img, .navbar-brand img, .logo img, #logo',
+  iconFontFamilies: /fontawesome|font awesome|icomoon|material|gform-icons/i,
 
   thresholds: { fidelity: 2, struct: 5, token: 0 },
   fidelityMode: 'auto',
