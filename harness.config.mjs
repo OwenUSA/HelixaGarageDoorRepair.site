@@ -97,5 +97,78 @@ export default {
   // toward magenta accents -- at fixed OKLCH L/C the lowest luminance sits near hue 300-360
   // -- so seeds landing there are common and must be re-rolled unless that IS your window.
   masterSeed: 3109,
+  // ---- assets (Prompt 2) -------------------------------------------------------------
+  // Provenance per D-09: NOTHING on the REPLACE list is ever downloaded into this repo.
+  // The mirror under reference/assets/ is a measurement artefact and is gitignored.
+  // Rules are checked IN ORDER; every `match` is anchored so a lightbox twin
+  // (`IMG_8213-e1685546199674`) cannot be swallowed by its thumbnail rule (`IMG_8213`).
+  slotRules: [
+    // --- shell -----------------------------------------------------------------------
+    { match: /^logo@2x$/, id: 'logo-header', sec: 'site-header', prov: 'REPLACE',
+      note: 'Their wordmark. Ours is a display-font wordmark; TODO(fact): logo asset (FN-13).' },
+    { match: /^logo@3x-white$/, id: 'logo-footer', sec: 'site-footer', prov: 'REPLACE',
+      note: 'Their reversed wordmark. Ours is the same wordmark, reversed. TODO(fact): logo asset (FN-13).' },
+
+    // --- home --------------------------------------------------------------------------
+    { match: /^crosby-roofing-residential-commercial-services-ga$/, id: 'hero-image',
+      sec: 'home-hero', prov: 'REPLACE', note: 'Full-bleed hero photograph.' },
+    { match: /^roofing-and-more$/, id: 'home-cta-image', sec: 'home-cta', prov: 'REPLACE',
+      note: 'Closing-band photograph; aspect changes across breakpoints.' },
+    { match: /^CertainTeed_Logo_Select_Shinglemaster$/, id: 'badge-cert-inline', sec: 'home-why',
+      prov: 'REPLACE', note: 'Manufacturer certification badge. TODO(fact): FN-04 — chip at slot dimensions, never an invented credential (D-14).' },
+    { match: /^Certainteed-Shingle-Select-Master$/, id: 'badge-cert-panel', sec: 'about-story / contact-main',
+      prov: 'REPLACE', note: 'Manufacturer certification badge, panel size. TODO(fact): FN-04 (D-14).' },
+
+    // service-card icons: we ship lucide-react, so no raster asset exists on our side
+    { match: /^icon-(repair|residential|commercial|gutters|siding|storm)$/, id: 'icon-service-card',
+      sec: 'home-services', prov: 'DELETED',
+      note: 'Six bespoke raster service icons. We ship `lucide-react` line icons instead — no raster asset, no placeholder.' },
+
+    // review furniture: D-13 forbids invented ratings and counts
+    { match: /^5-stars$/, id: 'badge-5-stars', sec: 'home-reviews', prov: 'DELETED',
+      note: 'Five-star graphic. D-13 — no invented rating; the band ships [TESTIMONIAL PLACEHOLDER] blocks.' },
+    { match: /^google-reviews$/, id: 'badge-google-reviews', sec: 'home-reviews', prov: 'DELETED',
+      note: 'Google Reviews lockup. D-13 — no review count, no third-party review branding.' },
+
+    // --- D-02, the locations tree ------------------------------------------------------
+    { match: /^(Augusta-GA|Columbia-SC|Macon-GA|Roofing-Company-in-Columbus)$/, id: 'city-card-photo',
+      sec: 'home-locations-grid / about-locations-grid', prov: 'DELETED',
+      note: 'City-card photograph in the Meet Our Teams grid. Whole band deleted per D-02.' },
+
+    // --- D-15, the cookie bar ----------------------------------------------------------
+    { match: /^gdpr-logo$/, id: 'cookie-bar-logo', sec: '—', prov: 'DELETED',
+      note: 'GDPR Cookie Compliance plugin logo. We ship no cookie bar (D-15).' },
+
+    // --- about / services / contact banners --------------------------------------------
+    { match: /^A1BE4534-2A82-41AD-8547-D7426AD3B858$/, id: 'about-banner-image',
+      sec: 'about-banner', prov: 'REPLACE', note: 'Page-banner photograph.' },
+    { match: /^residential-roofing$/, id: 'services-banner-image', sec: 'services-banner',
+      prov: 'REPLACE', note: 'Page-banner photograph.' },
+    { match: /^8F1D74EC-CDF4-47FA-B8FF-9FE440634A48$/, id: 'contact-banner-image',
+      sec: 'contact-banner', prov: 'REPLACE', note: 'Page-banner photograph.' },
+
+    // --- services page body ------------------------------------------------------------
+    // Lightbox full-size twins FIRST: they render at 0x0 and must not be mistaken for the
+    // thumbnails, which is why every thumbnail rule below is exact-anchored.
+    { match: /^(IMG_8213-e\d+|IMG_8909-scaled|IMG_9037-scaled|IMG_9041-scaled|IMG_9972-rotated|Photo_1080295521_.*)$/,
+      id: 'lightbox-fullsize-twin', sec: 'services-intro', prov: 'DELETED',
+      note: 'Responsive Lightbox full-size twin of a thumbnail; renders 0x0. We ship no lightbox.' },
+    { match: /^IMG_8213$/, id: 'services-thumb-1', sec: 'services-intro', prov: 'REPLACE', note: 'Work thumbnail 1 of 5.' },
+    { match: /^IMG_8909$/, id: 'services-thumb-2', sec: 'services-intro', prov: 'REPLACE', note: 'Work thumbnail 2 of 5.' },
+    { match: /^IMG_9037$/, id: 'services-thumb-3', sec: 'services-intro', prov: 'REPLACE', note: 'Work thumbnail 3 of 5.' },
+    { match: /^IMG_9041$/, id: 'services-thumb-4', sec: 'services-intro', prov: 'REPLACE', note: 'Work thumbnail 4 of 5.' },
+    { match: /^IMG_9972$/, id: 'services-thumb-5', sec: 'services-intro', prov: 'REPLACE', note: 'Work thumbnail 5 of 5.' },
+    { match: /^House6-300x200-1$/, id: 'services-card-image', sec: 'services-grid', prov: 'REPLACE',
+      note: 'Service-card photograph; one per card in the eight-card grid.' },
+    { match: /^CrosbyRoofingHeder$/, id: 'services-cta-bg', sec: 'services-cta',
+      prov: 'REPLACE', note: 'Full-bleed CTA band background; aspect changes hard across breakpoints.' },
+
+    // --- contact -----------------------------------------------------------------------
+    { match: /^IMG_0940$/, id: 'contact-photo', sec: 'contact-main', prov: 'REPLACE',
+      note: 'Their yard sign. Ours is a generic shop/vehicle slot at the same geometry.' },
+  ],
+  badgePatterns: [],
+  sharedSlots: { 'logo-header': true, 'logo-footer': true, 'badge-cert-panel': true },
+
   gradientSamples: 5,
 };

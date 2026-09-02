@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="250" viewBox="0 0 1440 250" role="img" aria-label="contact-banner-image placeholder">
+  <rect width="1440" height="250" fill="#222323"/>
+  <text x="50%" y="50%" fill="#ffffff" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif" font-size="21" font-weight="600" text-anchor="middle" dominant-baseline="middle">contact-banner-image</text>
+  <text x="50%" y="50%" dy="27" fill="#ffffff" fill-opacity="0.75" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif" font-size="15" text-anchor="middle" dominant-baseline="middle">1440x250</text>
+</svg>

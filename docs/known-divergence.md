@@ -80,3 +80,66 @@ page against the reference's home page and report plausible nonsense.
 |---|---|---|
 | — | palette seeds | pending Prompt 5 |
 | — | per-section residuals | pending the build wave; each gets ONE attempt then lands here (A-2) |
+
+
+---
+
+## Appended at Prompt 2+3+4
+
+### F-08 — every photographic slot is a placeholder (the concrete list)
+
+F-05 stated the rule; this is the inventory. **17 REPLACE slots**, none downloaded, each
+shipping a generated SVG at its exact rendered geometry in `public/placeholders/`
+(22 files: 17 slots plus 5 second crops where the aspect changes across breakpoints).
+
+`logo-header` `logo-footer` `hero-image` `home-cta-image` `badge-cert-inline`
+`badge-cert-panel` `about-banner-image` `services-banner-image` `contact-banner-image`
+`services-thumb-1` … `services-thumb-5` `services-card-image` `services-cta-bg`
+`contact-photo`
+
+Six of them sample **near-white** and their placeholder FILES are repainted down to a
+mountable mid-neutral (`logo-header`, `badge-cert-inline`, `badge-cert-panel`,
+`home-cta-image`, `services-card-image`, `services-cta-bg`). The inventory table keeps the
+honestly sampled hex. This is deliberate: a near-white placeholder under body copy makes
+`rendertruth.mjs` report `UNMEASURABLE` for that band, and an absence that reads as a pass
+is worse than a fail.
+
+**Five slots change aspect across breakpoints** and carry a second crop:
+`contact-banner-image`, `home-cta-image`, `services-banner-image`, `services-card-image`,
+`services-cta-bg`. `services-cta-bg` is the extreme one — 1440x392 at 1440, 390x654 at 390 —
+so its two prompts at Prompt 11 are genuinely different images, not one image cropped.
+
+Sections blocked by a placeholder are reported separately with the placeholder area excluded
+from the measurement, never as a fixable divergence.
+
+### F-09 — six reference icon rasters have no counterpart asset
+
+The reference's six service-card icons (`icon-repair`, `icon-residential`, `icon-commercial`,
+`icon-gutters`, `icon-siding`, `icon-storm`) are bespoke raster illustrations at ~180x180.
+We ship `lucide-react` line icons instead, so there is no image asset and no placeholder
+file for that slot. The rendered geometry of the icon box still has to match; the artwork
+inside it never will. Recorded as a permanent appearance difference, not a divergence to
+close.
+
+### F-10 — `framer-motion` is NOT justified, and this is now load-bearing
+
+Prompt 1's profile said so; `docs/behavior/08-scroll-reveal.md` now states it as a spec with
+acceptance criteria. Zero elements with `will-change`, zero running animations, zero
+`[data-aos]`, six CSS transitions in the whole reference theme, and a Bootstrap carousel
+containing exactly one slide. **We ship no scroll-reveal component at all.** That is a
+decision recorded in spec 08 so a later builder does not read the empty slot as unfinished
+work.
+
+The reference theme ships **no `prefers-reduced-motion` block of its own** — only Bootstrap
+does — so honouring D-19 across the site is entirely on us and cannot be inherited.
+
+### F-11 — the copy gates are closed with ZERO exemptions
+
+`similarity.mjs`: 35/35 sections at 0 shared 5-grams, 35/35 at trigram 0.000, 21/21 measured
+sections inside ±10%, **0 length exemptions taken**. Five blocks missed on the first draft
+and all five were rewritten longer rather than excused — including `home-services`, where an
+exemption was genuinely available (its reference band contains a Gravity Form we are
+forbidden to reproduce) and was declined.
+
+`/privacy` has **no length target of any kind** because the reference has no privacy page.
+That is stated rather than substituted for.

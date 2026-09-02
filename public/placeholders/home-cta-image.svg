@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="366" viewBox="0 0 600 366" role="img" aria-label="home-cta-image placeholder">
+  <rect width="600" height="366" fill="#8e8f8c"/>
+  <text x="50%" y="50%" fill="#111111" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif" font-size="28" font-weight="600" text-anchor="middle" dominant-baseline="middle">home-cta-image</text>
+  <text x="50%" y="50%" dy="34" fill="#111111" fill-opacity="0.75" font-family="system-ui,-apple-system,Segoe UI,Roboto,sans-serif" font-size="20" text-anchor="middle" dominant-baseline="middle">600x366</text>
+</svg>
