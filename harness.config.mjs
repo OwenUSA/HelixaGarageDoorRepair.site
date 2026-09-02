@@ -96,7 +96,93 @@ export default {
   // element. Report how many seeds you tried. Note the auto-selector is structurally biased
   // toward magenta accents -- at fixed OKLCH L/C the lowest luminance sits near hue 300-360
   // -- so seeds landing there are common and must be re-rolled unless that IS your window.
-  masterSeed: 3109,
+  masterSeed: 366,
+
+  // ---- referenceRamp: EXTRACTED at Prompt 5 from the LOCAL reference server ------------
+  // Mined by `scripts/extract-tokens.mjs`, which walks every visible element on all four
+  // saved pages at 1440 on 127.0.0.1:3209 and tallies computed `color`, `background-color`
+  // and `border-color` (backgrounds weighted by painted area). It hard-fails if
+  // getComputedStyle(body).fontFamily comes back Times, because an unmirrored capture
+  // renders unstyled and nothing about the numbers looks wrong.
+  //
+  // Raw tallies, by weight:
+  //   #f9f9f9  page ground        105934 area units      -> neutral200
+  //   #ffffff  surface             43664 area / 170 ink  -> neutral0
+  //   #262626  the one dark band   16704 area            -> primary   (see departure 1)
+  //   #e61c3a  brand crimson       16026 area /  91 ink  -> accent    (the CTA fill)
+  //   #c8c8c8  hairline               96 borders         -> neutral400
+  //   #4a4a4a  body copy             194 ink usages      -> neutral600
+  //   #212529  heading ink            80 ink usages      -> neutral900
+  //   #202020  deeper band ground    907 area units      -> (role folded into primaryDeep)
+  //   #c02b0a  brand hover            18 ink usages      -> accentDeep
+  //   #0c4da2  Bootstrap default link, 4 usages -- theme default, NOT a brand colour, unused
+  //
+  // TWO departures, both recorded in docs/known-divergence.md rather than fudged:
+  //
+  // 1. `primary` is the reference's dark band #262626, which is ACHROMATIC (OKLCH C 0).
+  //    A zero-chroma token cannot participate in a hue rotation at all -- it would come out
+  //    of every candidate as the same grey, and the dark bands would read as a second,
+  //    unrelated family beside the tinted neutrals. Chroma is introduced at 0.050, inside
+  //    the same 3-6% band the neutrals are tinted with. L is held EXACTLY (0.2686 ->
+  //    0.2677 after gamut fit). `primaryDeep` is the reference's deeper band #202020 given
+  //    the same treatment at C 0.045.
+  // 2. Nothing else moves. The reference's crimson already clears white-label AA on its own
+  //    fill (4.57:1) and its L/C are held literally, so unlike three sibling sites this ramp
+  //    needs no accessibility relocation of the CTA.
+  //
+  // MEASURED CHROMA ORDERING (sRGB max-min/255, and OKLCH C): accent #e61c3a C 0.2271 >
+  // accentDeep #c02b0a C 0.1892 > primary C 0.0500 > primaryDeep C 0.0453 > neutrals
+  // C 0.03-0.06. The call CTA is the most saturated token in the set before rotation and
+  // stays so after it, because the rotation holds every C exactly.
+  referenceRamp: {
+    neutral0:    '#ffffff', // L 1.0000  C 0
+    neutral200:  '#f9f9f9', // L 0.9821  C 0
+    neutral400:  '#c8c8c8', // L 0.8328  C 0
+    neutral600:  '#4a4a4a', // L 0.4091  C 0
+    neutral900:  '#212529', // L 0.2621  C 0.0095
+    primary:     '#3b1b1b', // L 0.2677  C 0.0505   DERIVED from #262626, see departure 1
+    primaryDeep: '#331716', // L 0.2449  C 0.0453   DERIVED from #202020, see departure 1
+    accent:      '#e61c3a', // L 0.5924  C 0.2271   measured, held exactly
+    accentDeep:  '#c02b0a', // L 0.5279  C 0.1892   measured, held exactly
+  },
+
+  // EXEMPT from the hue rotation (A-7). A randomly green error state is a bug.
+  semantic: { error: '#b3261e', success: '#1e7a3c', warning: '#a15c00' },
+
+  // ---- pairsInUse: what the SHELL ACTUALLY RENDERS -------------------------------------
+  // Not the ramp in theory. Every row below is a real fg/bg combination in app/globals.css
+  // plus the shell components, and it is kept synchronised with them BY HAND. A pair here
+  // that nothing renders makes the gate stricter than the site; a pair the site renders and
+  // this list omits is how a shell ships a 1.46:1 dark band and still reports green.
+  //
+  // The footer band is a real vertical GRADIENT (primary -> primaryDeep) and is declared as
+  // one, sampled at gradientSamples points and gated on its WORST stop. Declaring it as two
+  // flat rows would score only the endpoints.
+  //
+  // The focus ring is a TWO-LAYER construction -- a 2px surface-coloured halo inside a 3px
+  // ring -- which is the only shape that holds 3:1 against both a white page and a saturated
+  // button with one token. So the gated pairs are ring-vs-halo and halo-vs-button, which is
+  // what a user actually sees; there is no ring-directly-on-accent edge anywhere.
+  pairsInUse: [
+    { name: 'body on page ground',      fg: 'neutral600', bg: 'neutral200', min: 4.5, kind: 'text' },
+    { name: 'heading on page ground',   fg: 'neutral900', bg: 'neutral200', min: 4.5, kind: 'text' },
+    { name: 'body on surface',          fg: 'neutral600', bg: 'neutral0',   min: 4.5, kind: 'text' },
+    { name: 'heading on surface',       fg: 'neutral900', bg: 'neutral0',   min: 4.5, kind: 'text' },
+    { name: 'nav link on header',       fg: 'neutral900', bg: 'neutral0',   min: 4.5, kind: 'text' },
+    { name: 'inline link on surface',   fg: 'accentDeep', bg: 'neutral0',   min: 4.5, kind: 'text' },
+    { name: 'call CTA label on fill',   fg: 'neutral0',   bg: 'accent',     min: 4.5, kind: 'cta' },
+    { name: 'call CTA hover label',     fg: 'neutral0',   bg: 'accentDeep', min: 4.5, kind: 'text' },
+    { name: 'call bar label on fill',   fg: 'neutral0',   bg: 'accent',     min: 4.5, kind: 'text' },
+    { name: 'footer text on band',      fg: 'neutral0',   bg: { gradient: ['primary', 'primaryDeep'] }, min: 4.5, kind: 'text' },
+    { name: 'footer muted on band',     fg: 'neutral400', bg: { gradient: ['primary', 'primaryDeep'] }, min: 4.5, kind: 'text' },
+    { name: 'footer link on band',      fg: 'neutral0',   bg: { gradient: ['primary', 'primaryDeep'] }, min: 4.5, kind: 'text' },
+    { name: 'input edge on surface',    fg: 'borderStrong', bg: 'neutral0', min: 3,   kind: 'ui' },
+    { name: 'focus ring on halo',       fg: 'focus',      bg: 'neutral0',   min: 3,   kind: 'focus' },
+    { name: 'focus halo on CTA fill',   fg: 'neutral0',   bg: 'accent',     min: 3,   kind: 'focus' },
+    { name: 'focus halo on band',       fg: 'neutral0',   bg: { gradient: ['primary', 'primaryDeep'] }, min: 3, kind: 'focus' },
+    { name: 'error text on surface',    fg: 'error',      bg: 'neutral0',   min: 4.5, kind: 'text' },
+    { name: 'success text on surface',  fg: 'success',    bg: 'neutral0',   min: 4.5, kind: 'text' },
+  ],
   // ---- assets (Prompt 2) -------------------------------------------------------------
   // Provenance per D-09: NOTHING on the REPLACE list is ever downloaded into this repo.
   // The mirror under reference/assets/ is a measurement artefact and is gitignored.
