@@ -598,7 +598,7 @@ const privacyBody: CopySection = {
       heading: 'What we collect',
       body: [
         'The callback form on the contact page asks for a name, a phone number, the service you need, a preferred callback window and a short description of the problem. There is no email field anywhere on this site and no email address is collected in any form.',
-        'The form has no submission target. Nothing you type is transmitted anywhere, stored on a server, or written to a database, because there is no server-side component to receive it. Until a callback handler is connected, treat everything typed into that form as discarded when the page closes.',
+        'The form does not submit to a server. Nothing you type is transmitted anywhere, stored on a server, or written to a database. Everything typed into that form is discarded when the page closes — call the number at the top of the page to actually reach us.',
       ],
     },
     {
@@ -698,7 +698,7 @@ export const copy: Copy = {
       meta: {
         title: 'Privacy Policy | Helixa Garage Door Repair',
         description:
-          'What this site collects, which is very little: no email field, no analytics, no tracking pixels, and a callback form with no submission target behind it.',
+          'What this site collects, which is very little: no email field, no analytics, no tracking pixels, and a callback form that does not submit to a server.',
       },
       sections: [novelShell(header), privacyBanner, privacyBody, novelShell(footer)],
     },
