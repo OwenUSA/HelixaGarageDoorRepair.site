@@ -204,9 +204,9 @@ export default {
     { match: /^roofing-and-more$/, id: 'home-cta-image', sec: 'home-cta', prov: 'REPLACE',
       note: 'Closing-band photograph; aspect changes across breakpoints.' },
     { match: /^CertainTeed_Logo_Select_Shinglemaster$/, id: 'badge-cert-inline', sec: 'home-why',
-      prov: 'REPLACE', note: 'Manufacturer certification badge. TODO(fact): FN-04 — chip at slot dimensions, never an invented credential (D-14).' },
-    { match: /^Certainteed-Shingle-Select-Master$/, id: 'badge-cert-panel', sec: 'about-story / contact-main',
-      prov: 'REPLACE', note: 'Manufacturer certification badge, panel size. TODO(fact): FN-04 (D-14).' },
+      prov: 'DELETED', note: 'Certification badge slot removed outright (no certification we can evidence); no longer rendered.' },
+    { match: /^Certainteed-Shingle-Select-Master$/, id: 'badge-cert-panel', sec: 'about-story',
+      prov: 'DELETED', note: 'Certification badge slot removed outright (no certification we can evidence); no longer rendered.' },
 
     // service-card icons: we ship lucide-react, so no raster asset exists on our side
     { match: /^icon-(repair|residential|commercial|gutters|siding|storm)$/, id: 'icon-service-card',
@@ -257,7 +257,7 @@ export default {
       note: 'Their yard sign. Ours is a generic shop/vehicle slot at the same geometry.' },
   ],
   badgePatterns: [],
-  sharedSlots: { 'logo-header': true, 'logo-footer': true, 'badge-cert-panel': true },
+  sharedSlots: { 'logo-header': true, 'logo-footer': true },
 
   gradientSamples: 5,
 };

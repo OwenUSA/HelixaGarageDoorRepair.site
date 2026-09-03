@@ -38,11 +38,14 @@ There is no logo file and none is invented.
 | what is missing | `TODO(fact): logo asset` — FN-13 in `docs/facts-needed.md` |
 | prompt | written in `docs/asset-prompts.md` at Prompt 11 (OVERRIDE 2): wordmark + icon lockup, display font and applied palette hues named explicitly |
 
-## Badges — dimensioned, never invented
+## Badges — removed, not filled
 
-`badge-cert-inline` (300×71, `home-why`) and `badge-cert-panel` (300×124, `about-story` and
-`contact-main`) are manufacturer-certification lockups on the reference. We hold the slot at
-its exact dimensions and fill it with a visible `TODO(fact):` chip — **FN-04** — per D-14.
+`badge-cert-inline` (`home-why`) and `badge-cert-panel` (`about-story`) were
+manufacturer-certification lockups on the reference. Rather than hold the slot as a
+`TODO(fact):` chip (FN-04, D-14), the slots have been removed outright — no certification
+we can evidence, and no placeholder standing in for one. `badge-cert-inline.svg` and
+`badge-cert-panel.svg` are deleted from `public/placeholders/`; the rows above are kept as
+a historical record of the original build.
 No certification, licence number, bond, insurance status, BBB rating, founding year or team
 size is invented anywhere on this site.
 

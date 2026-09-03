@@ -1,6 +1,7 @@
 // about-story — ADAPTED, ref s03-content-about-crosby-roofing-seamless-gu. Single-column
-// long-form content, matching the reference's one-column body + sub-heading panels.
-import Image from 'next/image';
+// long-form content, matching the reference's one-column body + sub-heading panels. The
+// certification badge slot was removed (no certification we can evidence) rather than
+// filled with a placeholder.
 import { copy } from '@/content/copy';
 
 const section = copy.routes['/about'].sections.find((s) => s.id === 'about-story')!;
@@ -15,9 +16,6 @@ export default function AboutStory() {
             {p}
           </p>
         ))}
-        <div className="my-8 flex justify-center">
-          <Image src="/placeholders/badge-cert-panel.svg" alt="Certification badge (placeholder)" width={300} height={124} />
-        </div>
         {section.blocks?.map((b) => (
           <div key={b.heading} className="mt-10">
             <h3 className="text-xl font-extrabold">{b.heading}</h3>

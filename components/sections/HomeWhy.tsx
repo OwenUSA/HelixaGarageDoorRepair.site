@@ -1,8 +1,7 @@
 // home-why — ADAPTED, ref s03-why-choose-crosby-roofing-for-your. REORDERED to 2nd (the
 // proposition leads the page). Reference band: centred heading, a certification badge, then
-// a card grid (4 + 3). We keep the card-grid shape; the badge is a REPLACE placeholder
-// (F-08 badge-cert-inline) since a certification we cannot evidence is not ours to draw.
-import Image from 'next/image';
+// a card grid (4 + 3). We keep the card-grid shape; the certification badge slot was removed
+// (no certification we can evidence) rather than filled with a placeholder.
 import { copy } from '@/content/copy';
 
 const section = copy.routes['/'].sections.find((s) => s.id === 'home-why')!;
@@ -12,9 +11,6 @@ export default function HomeWhy() {
     <section data-section="home-why" className="py-12 lg:py-24" style={{ backgroundColor: 'var(--color-surface)' }}>
       <div className="mx-auto max-w-(--container-max) px-4 lg:px-8">
         <h2 className="text-center text-2xl font-extrabold lg:text-3xl">{section.heading}</h2>
-        <div className="mt-6 flex justify-center">
-          <Image src="/placeholders/badge-cert-inline.svg" alt="Certification badge (placeholder)" width={150} height={36} />
-        </div>
         <ul className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {section.blocks?.map((b) => (
             <li

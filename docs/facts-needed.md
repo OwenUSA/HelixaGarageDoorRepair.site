@@ -57,10 +57,10 @@ comment, and none of them is a guess.
 | FN-06, FN-07 | `TODO(fact): review count and average rating (FN-06). Nothing is invented here and no review schema is emitted.` | `home-reviews`, alongside two literal `[TESTIMONIAL PLACEHOLDER]` blocks at review length |
 | FN-13 | slot held at 175x88 (header) and 200x101 (footer); a Raleway 800 wordmark ships until the hand-back | `assets/INVENTORY.md`, Logo section |
 
-**Badge slots are dimensioned, not filled.** `badge-cert-inline` (300x71, `home-why`) and
-`badge-cert-panel` (300x124, `about-story` and `contact-main`) hold the exact geometry of
-the reference's manufacturer-certification lockups and carry a visible `TODO(fact):` chip
-rather than an invented credential (D-14).
+**Badge slots removed.** `badge-cert-inline` (`home-why`) and `badge-cert-panel`
+(`about-story`) have been removed outright rather than held as dimensioned placeholders —
+no certification we can evidence, and no slot for one, per D-14. Their placeholder SVGs
+are deleted from `public/placeholders/`.
 
 **Still marked DO NOT ADD:** FN-10 (response time — the proposition is transparency, not
 speed) and FN-11 (prices — D-12; "free estimate" is permitted and is the only commercial
