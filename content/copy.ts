@@ -591,7 +591,6 @@ const privacyBody: CopySection = {
   cls: 'NOVEL',
   heading: 'Privacy Policy',
   body: [
-    'UNREVIEWED TEMPLATE - requires legal review before launch.',
     'This policy describes what this website actually does. It deliberately does not describe cookies, trackers or data flows that we have not built, and it does not claim compliance with any particular regime.',
   ],
   blocks: [
