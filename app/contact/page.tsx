@@ -5,16 +5,33 @@
 // HTTP check caught it. Verified over HTTP, not by reading this file.
 import type { Metadata } from 'next';
 import { copy } from '@/content/copy';
+import { SITE_URL, business } from '@/lib/business';
 import PageBanner from '@/components/sections/PageBanner';
 import ContactMain from '@/components/sections/ContactMain';
 import ContactMap from '@/components/sections/ContactMap';
 
 const page = copy.routes['/contact'];
 const banner = page.sections.find((s) => s.id === 'contact-banner')!;
+const ogImage = `${SITE_URL}/placeholders/contact-banner-image.svg`;
 
 export const metadata: Metadata = {
   title: page.meta.title,
   description: page.meta.description,
+  alternates: { canonical: '/contact' },
+  openGraph: {
+    title: page.meta.title,
+    description: page.meta.description,
+    url: '/contact',
+    siteName: business.name,
+    type: 'website',
+    images: [{ url: ogImage }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: page.meta.title,
+    description: page.meta.description,
+    images: [ogImage],
+  },
 };
 
 export default function ContactPage() {

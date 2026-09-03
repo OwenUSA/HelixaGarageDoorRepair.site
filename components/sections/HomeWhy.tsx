@@ -13,7 +13,7 @@ export default function HomeWhy() {
       <div className="mx-auto max-w-(--container-max) px-4 lg:px-8">
         <h2 className="text-center text-2xl font-extrabold lg:text-3xl">{section.heading}</h2>
         <div className="mt-6 flex justify-center">
-          <Image src="/placeholders/badge-cert-inline.svg" alt="" width={150} height={36} />
+          <Image src="/placeholders/badge-cert-inline.svg" alt="Certification badge (placeholder)" width={150} height={36} />
         </div>
         <ul className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {section.blocks?.map((b) => (

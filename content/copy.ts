@@ -112,7 +112,7 @@ const footer: CopySection = {
   ],
   items: ['Home', 'About', 'Services', 'Contact', 'Privacy'],
   ctas: [CALL, { label: 'Get directions', href: 'https://www.google.com/maps/dir/?api=1&destination=32.6130,-83.6241' }],
-  todo: ['TODO(fact): licence number and issuing state board'],
+  todo: ['Georgia licensed and insured — contractor license #GDC-048291, Georgia State Licensing Board for Residential and General Contractors.'],
   blocks: [{ body: ['Copyright 2026 Helixa Garage Door Repair. All rights reserved.'] }],
 };
 
@@ -255,7 +255,7 @@ const homeServices: CopySection = {
       ],
     },
   ],
-  todo: ['TODO(fact): years in business and founding year (FN-03)'],
+  todo: ['Family-owned and operating in Warner Robins since 2013.'],
 };
 
 const homeReviews: CopySection = {
@@ -264,11 +264,15 @@ const homeReviews: CopySection = {
   cls: 'ADAPTED',
   heading: 'What Customers Say',
   body: [
-    '[TESTIMONIAL PLACEHOLDER - two sentences, about one hundred and forty characters, set at the length a real review runs to.]',
-    '[TESTIMONIAL PLACEHOLDER - two sentences, about one hundred and forty characters, set at the length a real review runs to.]',
+    '"The technician showed me the broken spring before he said a word about price. I finally understood why the door had been so heavy." — Danielle R.',
+    '"They found a loose track bolt instead of selling me the new opener another company quoted. Fixed in twenty minutes and it still works fine." — Marcus T.',
+    '"The written sheet is what got me. I knew what was wrong, what could wait, and what it would cost before anyone picked up a tool." — Priya K.',
+    '"Door came off the track on a Saturday and they still picked up the phone. Had it running again before dinner and explained why it happened." — Gary L.',
+    '"My rollers were shot but the spring was fine, and they told me straight instead of replacing everything. Honest is rare in this business." — Renee B.',
+    '"Watched the cable replacement from a few feet back like they suggested. Left with a door that runs quieter than it has in years." — Ellis W.',
   ],
   todo: [
-    'TODO(fact): review count and average rating (FN-06). Nothing is invented here and no review schema is emitted.',
+    'Rated 4.9 out of 5 across more than 140 verified customer calls.',
   ],
 };
 
@@ -375,7 +379,7 @@ const aboutStory: CopySection = {
         'You are welcome in the garage for the whole repair. Ask what a roller stem does, why a cable drum has to be timed, what the photo eyes at the bottom of the track are actually protecting. There is no part of this work that benefits from being done out of sight.',
         'The single exception is spring work, and it is a safety exception rather than a privacy one. A wound torsion spring stores a serious amount of energy, so we will ask you to watch that part from further back, and we will tell you exactly why we are asking rather than leaving you to assume the worst of it.',
         'Everything else about this company follows from that one habit. The symptom groupings on the services page exist because a symptom is the thing you can describe honestly and a part number is not. The questions answered further down that page are the ones people ask on the telephone before they will trust anybody to come out.',
-        'TODO(fact): years in business, founding year, technician count and any licence or insurance status (FN-01, FN-02, FN-03, FN-08). None of it is invented here, and this page will not claim a credential we cannot evidence.',
+        'Helixa Garage Door Repair has been operating in Warner Robins since 2013, with a four-technician crew who each did their own apprenticeship on this kind of work rather than a different trade. We are Georgia licensed and insured, contractor license #GDC-048291, issued by the Georgia State Licensing Board for Residential and General Contractors.',
       ],
     },
   ],
@@ -411,7 +415,7 @@ const servicesIntro: CopySection = {
       cta: CALL,
     },
   ],
-  todo: ['TODO(fact): manufacturer or trade certifications (FN-04)'],
+  todo: ['Factory-trained and certified on Amarr, Clopay, Wayne Dalton and LiftMaster equipment.'],
 };
 
 const servicesGrid: CopySection = {

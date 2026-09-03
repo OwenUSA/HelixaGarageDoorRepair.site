@@ -7,7 +7,11 @@ import { SITE_URL } from '@/lib/business';
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
   return ROUTES.map((r) => ({
-    url: new URL(r.href, SITE_URL).toString(),
+    // next.config.ts sets trailingSlash: true, so every real served URL (and every
+    // canonical tag emitted by the route metadata) ends in "/" except the root, which
+    // already is "/". Match that exactly here -- a sitemap entry that disagrees with the
+    // canonical URL for the same page is exactly the kind of drift D-01 exists to prevent.
+    url: new URL(r.href === '/' ? '/' : `${r.href}/`, SITE_URL).toString(),
     lastModified: now,
     changeFrequency: r.href === '/' ? ('weekly' as const) : ('monthly' as const),
     priority: r.href === '/' ? 1 : 0.7,

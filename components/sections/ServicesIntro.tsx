@@ -23,9 +23,14 @@ export default function ServicesIntro() {
               </p>
             ))}
             <ul className="mt-6 flex flex-wrap gap-3">
-              {THUMBS.map((t) => (
+              {THUMBS.map((t, i) => (
                 <li key={t}>
-                  <Image src={`/placeholders/${t}.svg`} alt="" width={90} height={90} />
+                  <Image
+                    src={`/placeholders/${t}.svg`}
+                    alt={`Garage door repair job example ${i + 1} in Warner Robins, GA`}
+                    width={90}
+                    height={90}
+                  />
                 </li>
               ))}
             </ul>

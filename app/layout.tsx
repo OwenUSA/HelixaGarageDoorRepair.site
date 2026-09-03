@@ -4,6 +4,8 @@ import './globals.css';
 import SiteHeader from '@/components/SiteHeader';
 import SiteFooter from '@/components/SiteFooter';
 import MobileCallBar from '@/components/MobileCallBar';
+import { localBusinessSchema } from '@/lib/schema';
+import { SITE_URL } from '@/lib/business';
 
 // F-02 (docs/known-divergence.md) — the reference paints body copy in the commercial
 // ff-tisa-sans-web-pro (FontFont/Monotype, via Adobe Fonts). Substitute: Source Sans 3, a
@@ -30,6 +32,7 @@ const raleway = Raleway({
 // the brand, serves it twice on every subpage — and that is invisible in the source. The
 // only title this file supplies is the fallback for a route that sets none.
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: 'Helixa Garage Door Repair',
   description: 'Garage door repair in Warner Robins, Georgia.',
 };
@@ -41,6 +44,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${sourceSans.variable} ${raleway.variable}`}>
       <body className="pb-14 lg:pb-0">
+        {/* Site-wide LocalBusiness structured data (SEO checklist item 7). Derived from
+            lib/business.ts; NO AggregateRating/Review fields, per D-13. */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+        />
         <SiteHeader />
         {children}
         <SiteFooter />

@@ -16,7 +16,7 @@ export default function AboutStory() {
           </p>
         ))}
         <div className="my-8 flex justify-center">
-          <Image src="/placeholders/badge-cert-panel.svg" alt="" width={300} height={124} />
+          <Image src="/placeholders/badge-cert-panel.svg" alt="Certification badge (placeholder)" width={300} height={124} />
         </div>
         {section.blocks?.map((b) => (
           <div key={b.heading} className="mt-10">

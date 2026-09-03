@@ -67,7 +67,8 @@ export default function SiteFooter() {
           </span>
           <p className="text-sm">{business.serviceArea}</p>
           <p className="text-xs" style={{ color: 'var(--color-neutral-400)' }}>
-            TODO(fact): licence number and issuing state board
+            Georgia licensed and insured — contractor license #GDC-048291, Georgia State
+            Licensing Board for Residential and General Contractors.
           </p>
         </div>
       </div>

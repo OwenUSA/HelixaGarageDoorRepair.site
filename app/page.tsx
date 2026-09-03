@@ -5,6 +5,7 @@
 // HTTP check caught it. Verified over HTTP, not by reading this file.
 import type { Metadata } from 'next';
 import { copy } from '@/content/copy';
+import { SITE_URL, business } from '@/lib/business';
 import HomeHero from '@/components/sections/HomeHero';
 import HomeWhy from '@/components/sections/HomeWhy';
 import HomeServices from '@/components/sections/HomeServices';
@@ -13,10 +14,26 @@ import HomeMap from '@/components/sections/HomeMap';
 import HomeCta from '@/components/sections/HomeCta';
 
 const page = copy.routes['/'];
+const ogImage = `${SITE_URL}/placeholders/hero-image.svg`;
 
 export const metadata: Metadata = {
   title: page.meta.title,
   description: page.meta.description,
+  alternates: { canonical: '/' },
+  openGraph: {
+    title: page.meta.title,
+    description: page.meta.description,
+    url: '/',
+    siteName: business.name,
+    type: 'website',
+    images: [{ url: ogImage }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: page.meta.title,
+    description: page.meta.description,
+    images: [ogImage],
+  },
 };
 
 export default function HomePage() {

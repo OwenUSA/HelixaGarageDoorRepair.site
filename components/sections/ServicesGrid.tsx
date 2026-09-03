@@ -12,7 +12,13 @@ export default function ServicesGrid() {
     <section data-section="services-grid" className="py-12 lg:py-20" style={{ backgroundColor: 'var(--color-neutral-200)' }}>
       <div className="mx-auto max-w-(--container-max) px-4 lg:px-8">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-[306px_1fr] lg:items-start">
-          <Image src="/placeholders/services-card-image.svg" alt="" width={306} height={204} className="w-full" />
+          <Image
+            src="/placeholders/services-card-image.svg"
+            alt="Garage door repair services in Warner Robins, GA"
+            width={306}
+            height={204}
+            className="w-full"
+          />
           <h2 className="text-2xl font-extrabold lg:text-3xl">{section.heading}</h2>
         </div>
 
