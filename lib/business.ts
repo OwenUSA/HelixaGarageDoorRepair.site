@@ -49,8 +49,8 @@ export const address = parseAddress(nap.address);
 export const hours = parseHours(nap.hours);
 export const coords = parseCoords(nap.mapCoords);
 
-/** Local-only base. D-18: no deploy, no domain. Listed in docs/PRE-LAUNCH.md. */
-export const SITE_URL = 'http://localhost:3109';
+/** Public origin. The site is deployed as a static export served by nginx on owen-main. */
+export const SITE_URL = 'https://helixagaragedoorrepair.site';
 
 /** All seven days, one block, no split hours (D-06). Never "24/7", never after-hours. */
 export const OPEN_DAYS = [

@@ -2,6 +2,7 @@
 // Reference band: two-col (long-form text left, Gravity Forms estimate panel right), then a
 // six-card icon grid below. The form column is banned by D-03 (it carries type=email on the
 // reference) and becomes a call-now panel instead, per docs/sections.md.
+import Link from 'next/link';
 import { Cpu, AlertTriangle, Zap, Waves, LayoutPanelTop, CalendarClock, Phone } from 'lucide-react';
 import { copy } from '@/content/copy';
 import { business } from '@/lib/business';
@@ -84,7 +85,7 @@ export default function HomeServices() {
             const Icon = ICONS[i % ICONS.length];
             return (
               <li key={b.heading}>
-                <a
+                <Link
                   href="/services"
                   className="flex h-full flex-col gap-3 rounded-sm border p-6 transition-[transform,box-shadow,border-color] duration-200 ease-out hover:-translate-y-0.5 focus-visible:-translate-y-0.5"
                   style={{ borderColor: 'var(--color-border)', borderRadius: 'var(--radius-sm)', backgroundColor: 'var(--color-surface)', boxShadow: 'var(--shadow-sm)' }}
@@ -96,7 +97,7 @@ export default function HomeServices() {
                       {p}
                     </p>
                   ))}
-                </a>
+                </Link>
               </li>
             );
           })}

@@ -9,12 +9,11 @@
   "scripts": {
     "dev": "next dev -p 3109",
     "build": "next build",
-    "start": "node scripts/start-standalone.mjs",
+    "serve": "npx serve out",
     "serve-ref": "node ../_shared/harness/src/serve-reference.mjs",
     "profile": "node ../_shared/harness/src/profile-reference.mjs",
     "capture": "node ../_shared/harness/src/capture.mjs",
-    "diff": "node ../_shared/harness/src/diff.mjs",
-    "postbuild": "node scripts/postbuild-standalone.mjs"
+    "diff": "node ../_shared/harness/src/diff.mjs"
   },
   "dependencies": {
     "clsx": "^2.1.1",
